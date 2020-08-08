@@ -64,8 +64,7 @@ public class SplashActivity extends Activity {
                     startActivity(new Intent(SplashActivity.this, GuideActivity.class));
                     finish();
                 }else{
-                    //跳到主页
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    
                 }
 
             }

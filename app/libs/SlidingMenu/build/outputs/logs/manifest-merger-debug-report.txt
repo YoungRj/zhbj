@@ -22,16 +22,16 @@ INJECTED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.
 		INJECTED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml
 		INJECTED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml
 uses-sdk
-ADDED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml:7:5-9:41
-INJECTED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml:7:5-9:41
-INJECTED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml:7:5-9:41
-INJECTED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml:7:5-9:41
-INJECTED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml:7:5-9:41
+INJECTED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml
+INJECTED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml
+INJECTED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml
+INJECTED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml
 	android:targetSdkVersion
-		ADDED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml:9:9-38
 		INJECTED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml
+		ADDED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml
 		INJECTED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml
 	android:minSdkVersion
-		ADDED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml:8:9-35
 		INJECTED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml
+		ADDED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml
 		INJECTED from D:\develop\documentIdea\zhbj\app\libs\SlidingMenu\AndroidManifest.xml

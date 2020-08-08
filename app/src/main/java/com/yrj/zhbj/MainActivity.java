@@ -19,7 +19,7 @@ public class MainActivity extends SlidingActivity {
         setBehindContentView(R.layout.left_menu);
         SlidingMenu slidingMenu = getSlidingMenu();
         slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);//全屏触摸
-        slidingMenu.setBehindOffset(250);//预留250px
+        slidingMenu.setBehindOffset(210);//预留210px
 
     }
 }

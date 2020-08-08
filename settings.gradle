@@ -1,2 +1,2 @@
-include ':app'
+include ':app',':app:libs:SlidingMenu'//引入侧滑菜单，路径：app\libs\SlidingMenu
 rootProject.name = "zhbj"

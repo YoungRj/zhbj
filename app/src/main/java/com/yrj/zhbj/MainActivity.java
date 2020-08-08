@@ -1,13 +1,25 @@
 package com.yrj.zhbj;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingActivity;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * 主页面
+ * SlidingActivity：侧滑菜单类
+ */
+public class MainActivity extends SlidingActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //侧滑菜单
+        setBehindContentView(R.layout.left_menu);
+        SlidingMenu slidingMenu = getSlidingMenu();
+        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);//全屏触摸
+        slidingMenu.setBehindOffset(250);//预留250px
+
     }
 }

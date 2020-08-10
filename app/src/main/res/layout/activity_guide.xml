@@ -7,22 +7,21 @@
     <androidx.viewpager.widget.ViewPager
             android:id="@+id/vp_guide"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-    </androidx.viewpager.widget.ViewPager>
+            android:layout_height="match_parent"/>
     <Button
+            android:id="@+id/btn_start"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="开始体验"
             android:visibility="gone"
-            android:id="@+id/btn_start"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="60dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textColor="@color/txt_btn_selector"
-            android:background="@drawable/btn_guide_selector"
-    />
+            />
+
     <RelativeLayout android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"

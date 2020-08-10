@@ -61,7 +61,7 @@ public class SplashActivity extends Activity {
                 boolean isGuideShow = PrefUtils.getBoolean(getApplicationContext(), "is_guide_show", false);
                 if(!isGuideShow){
                     //跳到新手引导页
-                    startActivity(new Intent(SplashActivity.this, GuideActivity.class));
+                    startActivity(new Intent(getApplicationContext(), GuideActivity.class));
                     finish();
                 }else{
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));

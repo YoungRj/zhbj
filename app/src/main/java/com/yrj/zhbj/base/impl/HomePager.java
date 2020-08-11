@@ -3,6 +3,7 @@ package com.yrj.zhbj.base.impl;
 import android.app.Activity;
 import android.graphics.Color;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TextView;
 import com.yrj.zhbj.base.BasePager;
 
@@ -24,5 +25,6 @@ public class HomePager extends BasePager {
         flContainer.addView(view);//给帧布局添加view对象
 
         tvTitle.setText("智慧北京");
+        btnMenu.setVisibility(View.GONE);//隐藏菜单按钮
     }
 }

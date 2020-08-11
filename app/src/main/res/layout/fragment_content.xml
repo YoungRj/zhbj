@@ -12,6 +12,7 @@
             android:layout_weight="1"
     />
     <RadioGroup
+            android:id="@+id/rg_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@mipmap/bottom_tab_bg"
@@ -19,22 +20,27 @@
     >
         <RadioButton
                 android:text="首页"
+                android:id="@+id/rg_home"
                 android:drawableTop="@drawable/tab_home_selector"
                 style="@style/ButtomTagStyle"/>
         <RadioButton
                 android:text="新闻中心"
+                android:id="@+id/rg_news"
                 android:drawableTop="@drawable/tab_news_selector"
                 style="@style/ButtomTagStyle"/>
         <RadioButton
                 android:text="智慧服务"
+                android:id="@+id/rg_smart"
                 android:drawableTop="@drawable/tab_smart_selector"
                 style="@style/ButtomTagStyle"/>
         <RadioButton
                 android:text="政务"
+                android:id="@+id/rg_gov"
                 android:drawableTop="@drawable/tab_gov_selector"
                 style="@style/ButtomTagStyle"/>
         <RadioButton
                 android:text="设置"
+                android:id="@+id/rg_setting"
                 android:drawableTop="@drawable/tab_setting_selector"
                 style="@style/ButtomTagStyle"/>
 

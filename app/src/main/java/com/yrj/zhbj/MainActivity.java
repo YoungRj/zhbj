@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.yrj.zhbj.base.impl.NewsCenterPager;
 import com.yrj.zhbj.fragment.ContentFragment;
 import com.yrj.zhbj.fragment.LeftMenuFragment;
 
@@ -30,7 +31,7 @@ public class MainActivity extends SlidingFragmentActivity {
 
         SlidingMenu slidingMenu = getSlidingMenu();
         slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);//全屏触摸
-        slidingMenu.setBehindOffset(210);//预留210px
+        slidingMenu.setBehindOffset(400);//预留210px
 
         initFragment();
     }
@@ -48,5 +49,19 @@ public class MainActivity extends SlidingFragmentActivity {
 
         //通过tag找到该fragment
 //        ContentFragment fragment = (ContentFragment) fm.findFragmentByTag(TAG_CONTENT);
+    }
+
+    //获取侧边栏对象
+    public LeftMenuFragment getLeftMenuFragment(){
+        FragmentManager fm = getSupportFragmentManager();
+        LeftMenuFragment lmFragment = (LeftMenuFragment) fm.findFragmentByTag(TAG_LEFT_MENU);
+        return lmFragment;
+    }
+
+    //获取ContentPager对象
+    public ContentFragment getContentFragment(){
+        FragmentManager fm = getSupportFragmentManager();
+        ContentFragment ncFragment = (ContentFragment) fm.findFragmentByTag(TAG_CONTENT);
+        return ncFragment;
     }
 }

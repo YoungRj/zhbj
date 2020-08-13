@@ -35,5 +35,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation project(':app:libs:SlidingMenu')//引入侧滑菜单，路径：app\libs\SlidingMenu
 //    implementation project(':app:libs:XUtils')//引入侧滑菜单，路径：app\libs\SlidingMenu
+    implementation 'com.google.code.gson:gson:2.6.2'
 
 }

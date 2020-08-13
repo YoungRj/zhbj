@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import com.yrj.zhbj.MainActivity;
 import com.yrj.zhbj.R;
 
 /**
@@ -13,7 +14,7 @@ import com.yrj.zhbj.R;
  */
 public class BasePager {
 
-    public Activity mActivity;
+    public Activity mActivity;//MainActivity
     public TextView tvTitle;
     public ImageButton btnMenu;
     public FrameLayout flContainer;//空的帧布局，由子类来动态填充
@@ -32,7 +33,21 @@ public class BasePager {
         tvTitle = view.findViewById(R.id.tv_title);
         btnMenu = view.findViewById(R.id.btn_menu);
         flContainer = view.findViewById(R.id.fl_container);
+
+        //点击菜单，控制侧边栏开关
+        btnMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //点击空白处时，如果当前侧边栏打开，则点击则关；反之亦然
+                toggle();
+            }
+        });
         return view;
+    }
+
+    private void toggle() {
+        MainActivity mainActivity = (MainActivity) mActivity;
+        mainActivity.getSlidingMenu().toggle();//如果当前为开，则关；反之亦然
     }
 
     //初始化数据

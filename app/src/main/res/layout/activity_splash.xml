@@ -4,10 +4,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/rl_root"
-        android:background="@mipmap/splash_bg_newyear">
+        android:background="@drawable/splash_bg_newyear">
 
     <ImageView
-            android:src="@mipmap/splash_horse_newyear"
+            android:src="@drawable/splash_horse_newyear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 </RelativeLayout>

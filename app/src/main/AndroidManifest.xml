@@ -2,18 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.yrj.zhbj">
 
-<!--    使用XUtils快速开发框架需要有以下权限-->
+    <!--    使用XUtils快速开发框架需要有以下权限-->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
             android:allowBackup="true"
-            android:icon="@mipmap/icon_150"
+            android:icon="@drawable/icon_150"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+                  android:theme="@style/Theme.PageIndicatorDefaults">
         </activity>
         <activity android:name=".GuideActivity">
         </activity>

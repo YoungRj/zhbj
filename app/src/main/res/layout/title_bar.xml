@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="@mipmap/title_red_bg"
+              android:background="@drawable/title_red_bg"
 >
 
     <TextView android:layout_width="wrap_content"
@@ -19,7 +19,7 @@
                  android:layout_height="wrap_content"
                  android:id="@+id/btn_menu"
                  android:background="@null"
-                 android:src="@mipmap/img_menu"
+                 android:src="@drawable/img_menu"
                  android:layout_alignParentLeft="true"
                  android:layout_centerVertical="true"
                  android:layout_marginLeft="10dp"

@@ -2,6 +2,7 @@ package com.yrj.zhbj.base.impl;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,8 @@ import com.yrj.zhbj.base.impl.menudetail.TopicMenuDetailPager;
 import com.yrj.zhbj.domain.NewsMenu;
 import com.yrj.zhbj.fragment.LeftMenuFragment;
 import com.yrj.zhbj.global.GlobalConstants;
+import com.yrj.zhbj.utils.CacheUtils;
+import com.yrj.zhbj.utils.PrefUtils;
 
 import java.util.ArrayList;
 
@@ -46,11 +49,18 @@ public class NewsCenterPager extends BasePager {
         flContainer.addView(view);//给帧布局添加view对象*/
 
         tvTitle.setText("新闻");
-        
-        //从服务器获取数据
+
+        //从缓存获取数据
+        String cacheData = CacheUtils.getCache(mActivity, GlobalConstants.CATEGORY_URL, null);
+        if (!TextUtils.isEmpty(cacheData)){
+            parseData(cacheData);
+        }
+
+        //继续请求服务器数据，保证数据最新
         getDataFromServer();
     }
 
+    //从服务器获取数据
     private void getDataFromServer() {
         HttpUtils httpUtils = new HttpUtils();
 
@@ -62,6 +72,9 @@ public class NewsCenterPager extends BasePager {
                 System.out.println("服务器数据："+result);
 
                 parseData(result);
+
+                //数据写到缓存
+                CacheUtils.setCache(mActivity, GlobalConstants.CATEGORY_URL, result);
 
             }
 
@@ -85,7 +98,7 @@ public class NewsCenterPager extends BasePager {
 
         //网络请求成功后，初始化四个菜单详情页
         mPagers = new ArrayList<>();
-        mPagers.add(new NewsMenuDetailPager(mActivity));
+        mPagers.add(new NewsMenuDetailPager(mActivity, newsMenu.data.get(0).children));
         mPagers.add(new TopicMenuDetailPager(mActivity));
         mPagers.add(new PhotosMenuDetailPager(mActivity));
         mPagers.add(new InteractMenuDetailPager(mActivity));
@@ -96,8 +109,6 @@ public class NewsCenterPager extends BasePager {
 
     //修改新闻中心菜单详情页
     public void setMenuDetailPager(int position) {
-        System.out.println("要修改新闻中心详情页了。。。。"+position);
-
         BaseMenuDetailPager pager = mPagers.get(position);//获取点击对应菜单的对象
 
         //修改之前清楚之前帧布局显示的内容

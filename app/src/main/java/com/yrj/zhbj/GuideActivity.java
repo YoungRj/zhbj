@@ -27,7 +27,7 @@ public class GuideActivity extends Activity {
     private ImageView ivRedPoint;//小红点
     private Button btnStart;//开始体验按钮
     // 图片ID集合
-    private int[] mImageIds = new int[]{R.mipmap.guide_1, R.mipmap.guide_2, R.mipmap.guide_3};
+    private int[] mImageIds = new int[]{R.drawable.guide_1, R.drawable.guide_2, R.drawable.guide_3};
 
     //把图片数据存到集合中，初始化布局时取出来
     private ArrayList<ImageView> mImageViews;

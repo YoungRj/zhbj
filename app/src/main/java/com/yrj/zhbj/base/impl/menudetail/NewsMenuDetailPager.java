@@ -8,6 +8,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.viewpagerindicator.TabPageIndicator;
 import com.yrj.zhbj.R;
 import com.yrj.zhbj.base.BaseMenuDetailPager;
@@ -26,6 +27,9 @@ import java.util.ArrayList;
  * 2.仿照smaple中的程序进行拷贝，SampleTabsDefault
  * 3.mIndicator.setViewPager(mViewPager);//将ViewPager和Indicator关联在一起
  * 4.重写PagerAdapter的getPageTitle返回指示器标题
+ * 5.样式需要在AndroidManifest.xml中添加<activity android:name=".MainActivity"
+ *                   android:theme="@style/Theme.ZHBJPageIndicatorDefaults">
+ *         </activity> 样式根据需要更新
  */
 public class NewsMenuDetailPager extends BaseMenuDetailPager {
 
@@ -100,5 +104,12 @@ public class NewsMenuDetailPager extends BaseMenuDetailPager {
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
         }
+    }
+
+    //点击跳转到下一个页签
+    @OnClick(R.id.btn_next) //通过注解的方式绑定。注意：在xml配置中onClick属性只适用于activity
+    public void nextPage(View view){
+        int currentPos = mViewPager.getCurrentItem();
+        mViewPager.setCurrentItem(++currentPos);
     }
 }

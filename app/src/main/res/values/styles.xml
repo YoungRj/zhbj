@@ -19,4 +19,22 @@
         <item name="android:paddingBottom">5dp</item>
     </style>
 
+    <style name="Theme.ZHBJPageIndicatorDefaults" parent="android:Theme">
+        <item name="vpiIconPageIndicatorStyle">@style/Widget.IconPageIndicator</item>
+        <item name="vpiTabPageIndicatorStyle">@style/Widget.ZHBJTabPageIndicator</item>
+    </style>
+    <style name="Widget.ZHBJTabPageIndicator" parent="Widget">
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/tab_indicator_selector</item>
+        <item name="android:paddingLeft">22dip</item>
+        <item name="android:paddingRight">22dip</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/txt_tab_indicator_selector</item>
+<!--        <item name="android:textAppearance">@style/TextAppearance.TabPageIndicator</item>-->
+        <item name="android:textSize">20sp</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
 </resources>

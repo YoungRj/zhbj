@@ -14,7 +14,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"
-                  android:theme="@style/Theme.PageIndicatorDefaults">
+                  android:theme="@style/Theme.ZHBJPageIndicatorDefaults">
         </activity>
         <activity android:name=".GuideActivity">
         </activity>

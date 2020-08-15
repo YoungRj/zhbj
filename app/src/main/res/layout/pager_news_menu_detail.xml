@@ -4,11 +4,27 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.viewpagerindicator.TabPageIndicator
-            android:id="@+id/indicator"
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-    />
+            android:orientation="horizontal">
+
+        <com.viewpagerindicator.TabPageIndicator
+                android:id="@+id/indicator"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+        />
+        <ImageButton
+                android:id="@+id/btn_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/news_cate_arr"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:padding="10dp"
+        />
+    </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"

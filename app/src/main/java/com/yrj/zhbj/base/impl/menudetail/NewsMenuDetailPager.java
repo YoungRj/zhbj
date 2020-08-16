@@ -6,10 +6,12 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.viewpagerindicator.TabPageIndicator;
+import com.yrj.zhbj.MainActivity;
 import com.yrj.zhbj.R;
 import com.yrj.zhbj.base.BaseMenuDetailPager;
 import com.yrj.zhbj.base.impl.TabDetailPager;
@@ -31,7 +33,7 @@ import java.util.ArrayList;
  *                   android:theme="@style/Theme.ZHBJPageIndicatorDefaults">
  *         </activity> 样式根据需要更新
  */
-public class NewsMenuDetailPager extends BaseMenuDetailPager {
+public class NewsMenuDetailPager extends BaseMenuDetailPager implements ViewPager.OnPageChangeListener {
 
     @ViewInject(R.id.vp_news_menu_detail)
     private ViewPager mViewPager;
@@ -72,6 +74,8 @@ public class NewsMenuDetailPager extends BaseMenuDetailPager {
         mViewPager.setAdapter(new newsMenuDetailAdapter());
         //关联后，显示标题还需要在适配器里重写getPageTitle方法
         mIndicator.setViewPager(mViewPager);//将ViewPager和Indicator关联在一起。注意：必须设置setAdapter之后
+        //设置页面触摸监听
+        mIndicator.setOnPageChangeListener(this);
     }
 
     class newsMenuDetailAdapter extends PagerAdapter {
@@ -111,5 +115,39 @@ public class NewsMenuDetailPager extends BaseMenuDetailPager {
     public void nextPage(View view){
         int currentPos = mViewPager.getCurrentItem();
         mViewPager.setCurrentItem(++currentPos);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if(position == 0){
+            setSlidingMenuEnable(true);//开启侧边栏
+        } else{
+            setSlidingMenuEnable(false);//禁用侧边栏
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
+    // 开启或禁用侧边栏
+    public void setSlidingMenuEnable(boolean enable) {
+        //获取MainActivity对象，因为继承了BaseFragment，而在MainActivity中使用当前Fragment替换（replace）
+        //通过MainActivity获取SlidingMenu对象
+        MainActivity mainActivity = (MainActivity) mActivity;
+        SlidingMenu slidingMenu = mainActivity.getSlidingMenu();
+        if (enable) {
+            //开启
+            slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        }else{
+            //禁用
+            slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+        }
     }
 }

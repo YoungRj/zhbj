@@ -110,7 +110,7 @@ public class ContentFragment extends BaseFragment {
     public void setSlidingMenuEnable(boolean enable) {
         //获取MainActivity对象，因为继承了BaseFragment，而在MainActivity中使用当前Fragment替换（replace）
         //通过MainActivity获取SlidingMenu对象
-        MainActivity mainActivity = (MainActivity) getActivity();
+        MainActivity mainActivity = (MainActivity) mActivity;
         SlidingMenu slidingMenu = mainActivity.getSlidingMenu();
         if (enable) {
             //开启

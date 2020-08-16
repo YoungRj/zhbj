@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import androidx.constraintlayout.solver.Cache;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.google.gson.Gson;
+import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -28,6 +30,8 @@ import com.yrj.zhbj.global.GlobalConstants;
 import com.yrj.zhbj.utils.CacheUtils;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 /**
  * 页签详情页，“北京”“中国”“国际”
  * 继承BaseMenuDetailPager，从代码来讲比较简洁，但不符合面向对象
@@ -41,6 +45,7 @@ public class TabDetailPager extends BaseMenuDetailPager {
     private ViewPager mViewPager;
 
     private String mUrl;
+    private ArrayList<NewsTab.TopNews> topNewsList;
 
     public TabDetailPager(Activity activity, NewsMenu.NewsTabData newsTabData) {
         super(activity);
@@ -93,25 +98,45 @@ public class TabDetailPager extends BaseMenuDetailPager {
     private void processData(String result) {
         Gson gson = new Gson();
         NewsTab newsTab = gson.fromJson(result, NewsTab.class);
-        System.out.println("页签新闻列表结果："+newsTab);
+        //初始化头条新闻数据
+        topNewsList = newsTab.data.topnews;
+        if(topNewsList != null ){
+            mViewPager.setAdapter(new TopNewsAdapter());
+        }
+
     }
 
     //头条新闻的数据适配器
     class TopNewsAdapter extends PagerAdapter {
-
-        @Override
-        public int getCount() {
-            return 0;
+        private BitmapUtils bitmapUtils;
+        public TopNewsAdapter(){
+            bitmapUtils = new BitmapUtils(mActivity);
+            //设置默认加载图片
+            bitmapUtils.configDefaultLoadingImage(R.drawable.pic_item_list_default);
         }
 
         @Override
-        public boolean isViewFromObject(@NonNull @NotNull View view, @NonNull @NotNull Object object) {
+        public int getCount() {
+            return topNewsList.size();
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
             return view == object;
         }
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            return super.instantiateItem(container, position);
+            ImageView view = new ImageView(mActivity);
+            NewsTab.TopNews topNews = topNewsList.get(position);
+            String topimage = topNews.topimage;//图片下载链接
+
+            view.setScaleType(ImageView.ScaleType.FIT_XY);//设置缩放模式，宽高适配窗体
+
+            bitmapUtils.display(view, topimage);//做图片缓存
+
+            container.addView(view);
+            return view;
         }
 
         @Override

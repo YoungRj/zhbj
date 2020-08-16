@@ -15,7 +15,7 @@ public class NewsTab {
         public String title;
         public String more;
         public ArrayList<News> news;
-        public ArrayList<TopNews> topnews;
+        public ArrayList<TopNews> topnews;//头条新闻
 
         @Override
         public String toString() {

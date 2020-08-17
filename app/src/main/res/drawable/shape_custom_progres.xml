@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--从0度转到360度，围绕中心点旋转-->
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+        android:fromDegrees="0"
+        android:toDegrees="360"
+        android:pivotX="50%"
+        android:pivotY="50%">
+<!--    ring：圆，innerRadius：圆大小，thickness：厚度-->
+    <shape android:shape="ring"
+           android:innerRadius="16dp"
+           android:thickness="3dp"
+           android:useLevel="false">
+        <gradient android:startColor="#fff"
+                  android:endColor="#f00"
+                  android:centerColor="#4f00"/>
+
+    </shape>
+</rotate>

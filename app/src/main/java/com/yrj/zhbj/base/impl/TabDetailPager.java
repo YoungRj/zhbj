@@ -1,16 +1,10 @@
 package com.yrj.zhbj.base.impl;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.solver.Cache;
+import android.widget.*;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.google.gson.Gson;
@@ -22,13 +16,15 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.viewpagerindicator.CirclePageIndicator;
 import com.yrj.zhbj.R;
 import com.yrj.zhbj.base.BaseMenuDetailPager;
 import com.yrj.zhbj.domain.NewsMenu;
 import com.yrj.zhbj.domain.NewsTab;
 import com.yrj.zhbj.global.GlobalConstants;
 import com.yrj.zhbj.utils.CacheUtils;
-import org.jetbrains.annotations.NotNull;
+import com.yrj.zhbj.view.RefreshListView;
+import com.yrj.zhbj.view.TopNewsViewPager;
 
 import java.util.ArrayList;
 
@@ -42,10 +38,17 @@ public class TabDetailPager extends BaseMenuDetailPager {
 //    private TextView view;
 
     @ViewInject(R.id.vp_tab_detail)
-    private ViewPager mViewPager;
+    private TopNewsViewPager mViewPager;
+    @ViewInject(R.id.tv_title)
+    private TextView tvTitle;
+    @ViewInject(R.id.indicator)
+    private CirclePageIndicator mIndicator;
+    @ViewInject(R.id.lv_list)
+    private RefreshListView lvList;
 
     private String mUrl;
     private ArrayList<NewsTab.TopNews> topNewsList;
+    private ArrayList<NewsTab.News> newsList;
 
     public TabDetailPager(Activity activity, NewsMenu.NewsTabData newsTabData) {
         super(activity);
@@ -61,7 +64,11 @@ public class TabDetailPager extends BaseMenuDetailPager {
 //        view.setTextColor(Color.RED);
 //        view.setGravity(Gravity.CENTER);//居中显示
         View view = View.inflate(mActivity, R.layout.pager_tab_detail, null);
+        View headerView = View.inflate(mActivity, R.layout.list_item_header, null);
         ViewUtils.inject(this, view);
+        ViewUtils.inject(this, headerView);
+
+        lvList.addHeaderView(headerView);
         return view;
     }
 
@@ -69,7 +76,7 @@ public class TabDetailPager extends BaseMenuDetailPager {
     public void initData() {
 //        view.setText(newsTabData.title);
         String cache = CacheUtils.getCache(mActivity, mUrl, null);
-        if(!TextUtils.isEmpty(cache)){
+        if (!TextUtils.isEmpty(cache)) {
             processData(cache);
         }
         getDataFromServer();
@@ -83,7 +90,7 @@ public class TabDetailPager extends BaseMenuDetailPager {
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 String result = responseInfo.result;
                 processData(result);
-                CacheUtils.setCache(mActivity,mUrl,result);
+                CacheUtils.setCache(mActivity, mUrl, result);
             }
 
             @Override
@@ -100,8 +107,38 @@ public class TabDetailPager extends BaseMenuDetailPager {
         NewsTab newsTab = gson.fromJson(result, NewsTab.class);
         //初始化头条新闻数据
         topNewsList = newsTab.data.topnews;
-        if(topNewsList != null ){
+        if (topNewsList != null) {
             mViewPager.setAdapter(new TopNewsAdapter());
+
+            mIndicator.setViewPager(mViewPager);//将圆形指示器和ViewPager绑定
+            mIndicator.setSnap(true);//快照展示，不展示圆点移动效果
+            mIndicator.onPageSelected(0);//将圆点位置归零
+
+            //更新头条标题新闻
+            mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    //更新头条标题新闻
+                    tvTitle.setText(topNewsList.get(position).title);
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+            });
+            //初始化头条新闻第一个页面默认标题
+            tvTitle.setText(topNewsList.get(0).title);
+        }
+
+        newsList = newsTab.data.news;
+        if (newsList != null) {
+            lvList.setAdapter(new NewsAdapter());
         }
 
     }
@@ -109,7 +146,8 @@ public class TabDetailPager extends BaseMenuDetailPager {
     //头条新闻的数据适配器
     class TopNewsAdapter extends PagerAdapter {
         private BitmapUtils bitmapUtils;
-        public TopNewsAdapter(){
+
+        public TopNewsAdapter() {
             bitmapUtils = new BitmapUtils(mActivity);
             //设置默认加载图片
             bitmapUtils.configDefaultLoadingImage(R.drawable.pic_item_list_default);
@@ -144,4 +182,57 @@ public class TabDetailPager extends BaseMenuDetailPager {
             container.removeView((View) object);
         }
     }
+
+    //新闻列表数据适配器
+    class NewsAdapter extends BaseAdapter {
+        private BitmapUtils bitmapUtils;
+
+        public NewsAdapter() {
+            bitmapUtils = new BitmapUtils(mActivity);
+            bitmapUtils.configDefaultLoadingImage(R.drawable.pic_item_list_default);
+        }
+
+        @Override
+        public int getCount() {
+            return newsList.size();
+        }
+
+        @Override
+        public NewsTab.News getItem(int i) {
+            return newsList.get(i);
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return i;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            ViewHolder holder;
+            if (view == null) {
+                view = View.inflate(mActivity, R.layout.list_item_news, null);
+                holder = new ViewHolder();
+                holder.ivIcon = view.findViewById(R.id.iv_icon);
+                holder.ivTitle = view.findViewById(R.id.iv_title);
+                holder.ivTime = view.findViewById(R.id.iv_time);
+                view.setTag(holder);
+            } else {
+                holder = (ViewHolder) view.getTag();
+            }
+            NewsTab.News news = getItem(i);
+            holder.ivTitle.setText(news.title);
+            holder.ivTime.setText(news.pubdate);
+            bitmapUtils.display(holder.ivIcon, news.listimage);
+            return view;
+        }
+    }
+
+    static class ViewHolder {
+        public ImageView ivIcon;
+        public TextView ivTitle;
+        public TextView ivTime;
+    }
+
+
 }

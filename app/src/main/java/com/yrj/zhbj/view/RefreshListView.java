@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * 下拉刷新ListView
+ * 下拉刷新和上滑刷新ListView
  */
 public class RefreshListView extends ListView implements AbsListView.OnScrollListener {
 
@@ -72,7 +72,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
         mHeadView.setPadding(0, -measuredHeight, 0, 0);//隐藏下拉刷新控件
 
         initArrowAnim();
-        setRefreshTime();
+        setRefreshTime();//设置时间
     }
 
     //初始化脚布局

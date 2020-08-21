@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
@@ -52,7 +53,7 @@ public class NewsCenterPager extends BasePager {
 
         //从缓存获取数据
         String cacheData = CacheUtils.getCache(mActivity, GlobalConstants.CATEGORY_URL, null);
-        if (!TextUtils.isEmpty(cacheData)){
+        if (!TextUtils.isEmpty(cacheData)) {
             parseData(cacheData);
         }
 
@@ -69,7 +70,7 @@ public class NewsCenterPager extends BasePager {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 String result = responseInfo.result;
-                System.out.println("服务器数据："+result);
+                System.out.println("服务器数据：" + result);
 
                 parseData(result);
 
@@ -87,9 +88,9 @@ public class NewsCenterPager extends BasePager {
     }
 
     //解析json数据
-    public void parseData(String json){
+    public void parseData(String json) {
         Gson gson = new Gson();
-        newsMenu  = gson.fromJson(json, NewsMenu.class);
+        newsMenu = gson.fromJson(json, NewsMenu.class);
         System.out.println("解析结果:" + newsMenu);
 
         MainActivity mainActivity = (MainActivity) mActivity;
@@ -100,7 +101,7 @@ public class NewsCenterPager extends BasePager {
         mPagers = new ArrayList<>();
         mPagers.add(new NewsMenuDetailPager(mActivity, newsMenu.data.get(0).children));
         mPagers.add(new TopicMenuDetailPager(mActivity));
-        mPagers.add(new PhotosMenuDetailPager(mActivity));
+        mPagers.add(new PhotosMenuDetailPager(mActivity, btnDisplay));
         mPagers.add(new InteractMenuDetailPager(mActivity));
 
         //单击底部“新闻”默认显示第一个布局
@@ -111,7 +112,14 @@ public class NewsCenterPager extends BasePager {
     public void setMenuDetailPager(int position) {
         BaseMenuDetailPager pager = mPagers.get(position);//获取点击对应菜单的对象
 
-        //修改之前清楚之前帧布局显示的内容
+        //判断如果是组图详情，显示切换按钮；否则，不显示
+        if (pager instanceof PhotosMenuDetailPager) {
+            btnDisplay.setVisibility(View.VISIBLE);
+        } else {
+            btnDisplay.setVisibility(View.GONE);
+        }
+
+        //修改之前清除之前帧布局显示的内容
         flContainer.removeAllViews();
         //修改当前帧布局显示的内容
         flContainer.addView(pager.mRootView);

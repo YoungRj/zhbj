@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.yrj.zhbj">
-
-    <!--    使用XUtils快速开发框架需要有以下权限-->
+    <!-- 使用XUtils快速开发框架需要有以下权限 -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
@@ -13,8 +12,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-                  android:theme="@style/Theme.ZHBJPageIndicatorDefaults"><!--配置自定义的Indicator样式-->
+        <activity android:name=".NewsDetailActivity">
+        </activity>
+        <activity
+                android:name=".MainActivity"
+                android:theme="@style/Theme.ZHBJPageIndicatorDefaults"> <!-- 配置自定义的Indicator样式 -->
         </activity>
         <activity android:name=".GuideActivity">
         </activity>

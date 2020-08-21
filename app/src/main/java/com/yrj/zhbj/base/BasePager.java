@@ -17,6 +17,7 @@ public class BasePager {
     public Activity mActivity;//MainActivity
     public TextView tvTitle;
     public ImageButton btnMenu;
+    public ImageButton btnDisplay;//组图中的ListView和GridView切换按钮
     public FrameLayout flContainer;//空的帧布局，由子类来动态填充
 
     public View mRootView;//当前页面的根布局
@@ -33,6 +34,7 @@ public class BasePager {
         tvTitle = view.findViewById(R.id.tv_title);
         btnMenu = view.findViewById(R.id.btn_menu);
         flContainer = view.findViewById(R.id.fl_container);
+        btnDisplay = view.findViewById(R.id.btn_display);
 
         //点击菜单，控制侧边栏开关
         btnMenu.setOnClickListener(new View.OnClickListener() {

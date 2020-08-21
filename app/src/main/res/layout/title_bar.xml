@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@drawable/title_red_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/title_red_bg"
 >
 
     <TextView android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="标题"
+              android:text=""
               android:id="@+id/tv_title"
               android:layout_centerHorizontal="true"
               android:layout_centerVertical="true"
@@ -23,6 +23,56 @@
                  android:layout_alignParentLeft="true"
                  android:layout_centerVertical="true"
                  android:layout_marginLeft="10dp"
+    />
+
+    <ImageButton android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:id="@+id/btn_back"
+                 android:background="@null"
+                 android:src="@drawable/back"
+                 android:layout_alignParentLeft="true"
+                 android:layout_centerVertical="true"
+                 android:layout_marginLeft="10dp"
+                 android:visibility="gone"
+    />
+
+    <LinearLayout android:id="@+id/ll_control"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentRight="true"
+                  android:layout_centerVertical="true"
+                  android:layout_marginRight="10dp"
+                  android:gravity="center_vertical"
+                  android:orientation="horizontal"
+                  android:visibility="gone"
+    >
+
+        <ImageButton android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/btn_textSize"
+                     android:background="@null"
+                     android:src="@drawable/icon_textsize"
+                     android:layout_marginRight="10dp"
+        />
+
+        <ImageButton android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/btn_share"
+                     android:background="@null"
+                     android:src="@drawable/icon_share"
+        />
+
+    </LinearLayout>
+
+    <ImageButton android:id="@+id/btn_display"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentRight="true"
+                 android:layout_centerVertical="true"
+                 android:background="@null"
+                 android:src="@drawable/icon_pic_grid_type"
+                 android:layout_marginRight="10dp"
+                 android:visibility="gone"
     />
 
 

@@ -1,4 +1,53 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.mob.sdk'
+
+MobSDK {
+    appKey "308642711f08d"
+    appSecret "9cf3a83d164d4fea4461b5de8d182eed"
+    ShareSDK {
+        loopShare true
+        devInfo {
+            SinaWeibo {
+                appKey "568898243"
+                appSecret "38a4f8204cc784f81f9f0daaf31e02e3"
+                callbackUri "http://www.sharesdk.cn"
+            }
+            Wechat {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+                userName "gh_afb25ac019c9"
+                path "pages/index/index.html?id=1"
+                withShareTicket true
+                miniprogramType 2
+            }
+            QQ {
+                appId "100371282"
+                appKey "aed9b0303e3ed1e27bae87c33761161d"
+            }
+            Douyin {
+                appKey "aw9ivykfjvi4hpwo"
+                appSecret "42b4caa6bda60bd49f05f06d0a4956e1"
+            }
+            Douban {
+                appKey "031a96a3aa8b28af094fc3eaffa17a0d"
+                appSecret "2e675e730571b75d"
+                callbackUri "http://mob.com"
+            }
+            WechatMoments {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+            }
+            WechatFavorite {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+            }
+            QZone {
+                appId "100371282"
+                appKey "aed9b0303e3ed1e27bae87c33761161d"
+            }
+        }
+    }
+}
 
 android {
     compileSdkVersion 30
@@ -34,7 +83,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation project(':app:libs:SlidingMenu')//引入侧滑菜单，路径：app\libs\SlidingMenu
-//    implementation project(':app:libs:XUtils')//引入侧滑菜单，路径：app\libs\SlidingMenu
     implementation 'com.google.code.gson:gson:2.6.2'
     implementation 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'//引入ViewPagerIndicator（2）
 

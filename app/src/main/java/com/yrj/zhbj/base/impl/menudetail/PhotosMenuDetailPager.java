@@ -1,9 +1,7 @@
 package com.yrj.zhbj.base.impl.menudetail;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
@@ -21,6 +19,7 @@ import com.yrj.zhbj.base.BaseMenuDetailPager;
 import com.yrj.zhbj.domain.PhotosBen;
 import com.yrj.zhbj.global.GlobalConstants;
 import com.yrj.zhbj.utils.CacheUtils;
+import com.yrj.zhbj.utils.bitmap.MyBitmapUtils;
 
 import java.util.ArrayList;
 
@@ -99,16 +98,17 @@ public class PhotosMenuDetailPager extends BaseMenuDetailPager implements View.O
     }
 
     private boolean isListView = true;//是否是ListView
+
     @Override
     public void onClick(View view) {
-        System.out.println("isListView:"+isListView);
-        if (isListView){
+        System.out.println("isListView:" + isListView);
+        if (isListView) {
             //显示GridView
             lvList.setVisibility(View.GONE);
             gvList.setVisibility(View.VISIBLE);
             btnDisplay.setImageResource(R.drawable.icon_pic_list_type);
             isListView = false;
-        } else{
+        } else {
             //显示ListView
             lvList.setVisibility(View.VISIBLE);
             gvList.setVisibility(View.GONE);
@@ -119,11 +119,13 @@ public class PhotosMenuDetailPager extends BaseMenuDetailPager implements View.O
 
     //组图适配器
     class PhotosAdapter extends BaseAdapter {
-        BitmapUtils bitmapUtils;
+//        private BitmapUtils bitmapUtils;
+        private MyBitmapUtils bitmapUtils;//使用自己定义的缓存
 
         public PhotosAdapter() {
-            bitmapUtils = new BitmapUtils(mActivity);
-            bitmapUtils.configDefaultLoadingImage(R.drawable.pic_item_list_default);//设置默认图片
+//            bitmapUtils = new BitmapUtils(mActivity);
+//            bitmapUtils.configDefaultLoadingImage(R.drawable.pic_item_list_default);//设置默认图片
+            bitmapUtils = new MyBitmapUtils(mActivity);
         }
 
         @Override
